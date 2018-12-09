@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: 'development',
@@ -10,11 +10,11 @@ module.exports = {
     },
     entry: {
         main: './src/index.js',
-        about: './src/about.new.js'
     },
     output: {
         filename: '[name].js',
-        path: path.join(__dirname, './dist')
+        path: path.join(__dirname, './dist'),
+        publicPath: '/',
     },
     module: {
         rules: [
@@ -29,12 +29,19 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: "css-loader"
-                })
-            },
+                test: /\.scss$/,
+                use: [{
+                    loader: MiniCssExtractPlugin.loader
+                }, {
+                    loader: 'css-loader', options: {
+                        sourceMap: true
+                    }
+                }, {
+                    loader: 'sass-loader', options: {
+                        sourceMap: true
+                    }
+                }]
+            }
             // {
             //     test: /\.hbs/,
             //     exclude: /(node_modules|bower_components)/,
@@ -47,6 +54,9 @@ module.exports = {
             filename: 'index.html',
             template: 'index.html'
         }),
-        new ExtractTextPlugin("styles.css")
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[id].css'
+        })
     ]
 };

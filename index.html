@@ -5,9 +5,66 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Тестовый проект</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script>
+    <script src="https://vk.com/js/api/openapi.js"></script>
+    <title>Другофильтр</title>
 </head>
 <body>
-    <p>Проверка звука вошла без стука</p>
+    <div class="flex-container">
+        <div class="flex-item">
+            <div class="heading">
+                <p>Выберите друзей</p>
+            </div>
+            <div class="search">
+                <div>
+                    <div class="searchIcon"></div>
+                </div>
+                <input type="text" class="search_Left" placeholder="Начните вводить имя друга">
+                <div>
+                    <div class="searchIcon"></div>
+                </div>
+                <input type="text" class="search_Right" placeholder="Начните вводить имя друга">
+            </div>
+            <div class="workspace">
+                <div class="titleFriends">
+                    <p>Ваши друзья</p>
+                </div>
+                <div class="titleFriends">
+                    <p>Друзья в списке</p>
+                </div>
+                <div class="left"></div>
+                <div class="separator"></div>
+                <div class="right"></div>
+                <div class="footer">
+                    <button class="save">Сохранить</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <script type="text/x-handlebars-template" id="tempeLestFriendsLeft">
+
+            {{#each list}}
+            <div class="item" draggable="true" id="{{id}}">
+                <img src="{{photo_50}}">
+                <p>{{first_name}} {{last_name}}</p>
+                <span class="plus"></span>
+            </div>
+            {{/each}}
+
+    </script><script type="text/x-handlebars-template" id="tempeLestRight">
+
+            {{#each list}}
+            <div class="item" draggable="true" id="{{id}}">
+                <img src="{{photo_50}}">
+                <p>{{first_name}} {{last_name}}</p>
+                <span class="minus"></span>
+            </div>
+            {{/each}}
+
+    </script>
 </body>
 </html>
